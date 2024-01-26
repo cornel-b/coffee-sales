@@ -1,32 +1,27 @@
 <div>
     <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
-        {{ __('Previous Sales') }}
-
+        <h4 class="text-2xl font-bold dark:text-white pt-2 mb-4">{{ __('Previous Sales') }}</h4>
         @if (count($sales) === 0)
-        No current sales fount
+        No current sales found
         @else
-
-        <table class="table-auto border-collapse border border-slate-400">
-            <thead>
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th>Quantity</th>
-                    <th>Unit Cost</th>
-                    <th>Selling Price</th>
+                    <th scope="col" class="px-6 py-3">Quantity</th>
+                    <th scope="col" class="px-6 py-3">Unit Cost</th>
+                    <th scope="col" class="px-6 py-3">Selling Price</th>
                 </tr>
             </thead>
             <tbody>
-
                 @foreach ($sales as $sale)
-                <tr class="p-2 border border-slate-300">
-                    <td>{{ $sale->quantity }}</td>
-                    <td>{{ $sale->unit_cost }}</td>
-                    <td><x-price value="{{ $sale->selling_price }}" /></td>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4">{{ $sale->quantity }}</td>
+                    <td class="px-6 py-4">{{ $sale->unit_cost }}</td>
+                    <td class="px-6 py-4"><x-price value="{{ $sale->selling_price }}" /></td>
                 </tr>
                 @endforeach
-
             </tbody>
         </table>
-
         @endif
     </h2>
 </div>

@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    public $fillable = ['name', 'profit_margin'];
+
     public function sales(): HasMany
     {
         return $this->hasMany(Sale::class);
