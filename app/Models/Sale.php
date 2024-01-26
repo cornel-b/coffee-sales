@@ -24,4 +24,17 @@ class Sale extends Model
             get: fn () => ($this->quantity * $this->unit_cost) / (1 - $this->profit_margin) + $this->shipping_cost,
         );
     }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'product_id' => $this->product_id,
+            'quantity' => $this->quantity,
+            'unit_cost' => $this->unit_cost,
+            'profit_margin' => $this->profit_margin,
+            'shipping_cost' => $this->shipping_cost,
+            'selling_price' => $this->selling_price,
+        ];
+    }
 }
