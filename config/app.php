@@ -195,4 +195,6 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'default_shipping_cost' => 10,
+
 ];
