@@ -19,5 +19,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Gold Coffee',
             'profit_margin' => '0.25',
         ]);
+
+        Product::create([
+            'name' => 'Arabic Coffee',
+            'profit_margin' => '0.15',
+        ]);
     }
 }

@@ -9,7 +9,12 @@ use Livewire\Component;
 
 class CreateSale extends Component
 {
-    public $selling_price = '';
+    public $products;
+
+    public string $selling_price = '';
+
+    #[Validate('required|numeric')]
+    public int $product_id = 1;
 
     #[Validate('required|numeric|min:1')]
     public int $quantity = 1;
@@ -17,9 +22,9 @@ class CreateSale extends Component
     #[Validate('required|numeric|min:0.1')]
     public float $unit_cost = 0;
 
-    public function updated($name, $value)
+    public function updated()
     {
-        $product = Product::firstOrFail();
+        $product = Product::find($this->product_id);
         $sale = new Sale(
             [
                 'quantity' => $this->quantity ?? 1,
@@ -36,7 +41,7 @@ class CreateSale extends Component
     {
         $this->validate();
 
-        $product = Product::firstOrFail();
+        $product = Product::find($this->product_id);
 
         Sale::create([
             'product_id' => $product->id,
@@ -47,11 +52,22 @@ class CreateSale extends Component
         ]);
 
         $this->reset();
+        $this->fetchProducts();
         $this->dispatch('sale-created');
+    }
+
+    public function mount()
+    {
+        $this->fetchProducts();
+    }
+
+    public function fetchProducts()
+    {
+        $this->products = Product::get();
     }
 
     public function render()
     {
-        return view('livewire.create-sale');
+        return view('livewire.create-sale', ['products' => $this->products]);
     }
 }
